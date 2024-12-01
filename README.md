@@ -11,6 +11,7 @@ Register :
 
 - Automated daily task
 - Automated main task
+- Automated open box
 - Multi-account support
 
 ## Installation
