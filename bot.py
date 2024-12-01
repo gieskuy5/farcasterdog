@@ -151,9 +151,34 @@ class FarcasterDog:
             print(f"{Colors.RED}[-] Error updating task status: {str(e)}{Colors.RESET}")
             return {}
 
+    def open_magic_chest(self, jwt_token: str) -> Optional[int]:
+        """
+        Opens the magic chest and returns the bonus points received
+        """
+        url = f"{self.base_url}/api/farcaster_dog/open_magic_chest"
+        headers = {**self.headers, "Cookie": f"token={jwt_token}"}
+        
+        try:
+            response = requests.post(url, headers=headers)
+            if response.status_code == 200:
+                result = response.json()
+                return result.get('bonus')
+            return None
+        except Exception as e:
+            print(f"{Colors.RED}[-] Error opening magic chest: {str(e)}{Colors.RESET}")
+            return None
+
     def process_tasks(self, user_data: Dict, jwt_token: str):
         fid_id = user_data['fid']
         print(f"\n{Colors.BLUE}[+] Starting Daily Tasks Processing...{Colors.RESET}")
+        
+        # Try to open magic chest first
+        print(f"\n{Colors.BLUE}[+] Attempting to open magic chest...{Colors.RESET}")
+        bonus = self.open_magic_chest(jwt_token)
+        if bonus:
+            print(f"{Colors.GREEN}[+] Successfully opened magic chest! Received {bonus} bonus points{Colors.RESET}")
+        else:
+            print(f"{Colors.YELLOW}[*] No magic chest available or already opened{Colors.RESET}")
         
         tasks = self.get_daily_tasks(fid_id, jwt_token)
         if not tasks:
