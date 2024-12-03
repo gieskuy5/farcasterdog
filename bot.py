@@ -13,14 +13,14 @@ class Colors:
     YELLOW = '\033[93m'
     CYAN = '\033[96m'
 
-class FarcasterDog:
+class FarDog:
     def __init__(self):
-        self.base_url = "https://api.farcasterdog.xyz"
+        self.base_url = "https://api.fardog.xyz"
         self.token_file = "token.txt"
         self.headers = {
             "Accept": "application/json",
-            "Origin": "https://farcasterdog.xyz",
-            "Referer": "https://farcasterdog.xyz/",
+            "Origin": "https://fardog.xyz",
+            "Referer": "https://fardog.xyz/",
             "Content-Type": "application/json",
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
         }
@@ -309,7 +309,7 @@ class FarcasterDog:
         while True:  # Add infinite loop to keep the bot running
             start_time = datetime.now()
             print(f"\n{Colors.CYAN}=== Starting New Cycle at {start_time.strftime('%Y-%m-%d %H:%M:%S')} ==={Colors.RESET}")
-            print(f"{Colors.CYAN}[+] Starting FarcasterDog Bot (Multi-Account Mode)...{Colors.RESET}")
+            print(f"{Colors.CYAN}[+] Starting FarDog Bot (Multi-Account Mode)...{Colors.RESET}")
             
             tokens = self.load_tokens()
             if not tokens:
@@ -358,7 +358,7 @@ class FarcasterDog:
 
 def main():
     try:
-        bot = FarcasterDog()
+        bot = FarDog()
         bot.start()
     except KeyboardInterrupt:
         print(f"\n{Colors.YELLOW}[!] Bot stopped by user{Colors.RESET}")
